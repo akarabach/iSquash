@@ -13,32 +13,17 @@ export const env = createEnv({
 
     GOOGLE_CLIENT_ID: z.string().min(1),
     GOOGLE_CLIENT_SECRET: z.string().min(1),
-    // NEXTAUTH_SECRET: z.string().min(1),
-    // STRIPE_API_KEY: z.string().min(1),
-    // STRIPE_WEBHOOK_SECRET: z.string().min(1),
-    // PRICE_ID: z.string().min(1),
-    // HOSTNAME: z.string().min(1),
+
     PLAUSIBLE_URL: z.string().min(1),
-    // MONGODB_URI: z.string().min(1),
-    // S3_ENDPOINT: z.string(),
-    // S3_PORT: z.string().optional(),
-    // S3_ACCESS_KEY: z.string(),
-    // S3_SECRET_KEY: z.string(),
-    // S3_BUCKET_NAME: z.string(),
-    // S3_USE_SSL: z.string().optional(),
     APP_URL: z.string().min(1),
-    // R2_ACCOUNT_ID: z.string().min(1),
+
     R2_TOKEN_VALUE: z.string().min(1),
     R2_ACCESS_KEY_ID: z.string().min(1),
     R2_SECRET_ACCESS_KEY: z.string().min(1),
     R2_S3_URL: z.string().min(1),
     R2_BUCKET_NAME: z.string().min(1),
+
     IMAGE_BASE_URL: z.string().min(1),
-    STRIPE_API_KEY: z.string().min(1),
-    STRIPE_WEBHOOK_SECRET: z.string().min(1),
-    PRICE_ID_50: z.string().min(1),
-    PRICE_ID_100: z.string().min(1),
-    PRICE_ID_250: z.string().min(1),
   },
   /*
    * Environment variables available on the client (and server).
@@ -47,8 +32,8 @@ export const env = createEnv({
    */
   client: {
     NEXT_PUBLIC_IMAGE_BASE_URL: z.string().min(1),
-    // NEXT_PUBLIC_PROJECT_PLANNER_ID: z.string().min(1),
-    // NEXT_PUBLIC_SKIP_EVENTS: z.string().optional(),
+    NEXT_PUBLIC_SUPABASE_URL: z.string().min(1),
+    NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string().min(1),
   },
   /*
    * Due to how Next.js bundles environment variables on Edge and Client,
@@ -60,13 +45,10 @@ export const env = createEnv({
     NODE_ENV: process.env.NODE_ENV,
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
     GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
-    // NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
-    // STRIPE_API_KEY: process.env.STRIPE_API_KEY,
-    // STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
-    // PRICE_ID: process.env.PRICE_ID,
+
     PLAUSIBLE_URL: process.env.PLAUSIBLE_URL,
     APP_URL: process.env.APP_URL,
-    // R2_ACCOUNT_ID: process.env.R2_ACCOUNT_ID,
+
     R2_TOKEN_VALUE: process.env.R2_TOKEN_VALUE,
     R2_ACCESS_KEY_ID: process.env.R2_ACCESS_KEY_ID,
     R2_SECRET_ACCESS_KEY: process.env.R2_SECRET_ACCESS_KEY,
@@ -74,11 +56,8 @@ export const env = createEnv({
     R2_BUCKET_NAME: process.env.R2_BUCKET_NAME,
     IMAGE_BASE_URL: process.env.NEXT_PUBLIC_IMAGE_BASE_URL,
     NEXT_PUBLIC_IMAGE_BASE_URL: process.env.NEXT_PUBLIC_IMAGE_BASE_URL,
-    STRIPE_API_KEY: process.env.STRIPE_API_KEY,
-    STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
-    PRICE_ID_50: process.env.PRICE_ID_50,
-    PRICE_ID_100: process.env.PRICE_ID_100,
-    PRICE_ID_250: process.env.PRICE_ID_250,
+    NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
+    NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
   },
 
   /**
