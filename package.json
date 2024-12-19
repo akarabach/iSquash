@@ -4,9 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "pnpm run db-migrate && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "db-push": "drizzle-kit push --config=drizzle.config.ts",
+    "db-migrate": "drizzle-kit migrate --config=drizzle.config.ts",
+    "db-generate": "drizzle-kit generate --config=drizzle.config.ts",
+    "db-studio": "drizzle-kit studio"
   },
   "dependencies": {
     "@radix-ui/react-label": "2.1.1",
