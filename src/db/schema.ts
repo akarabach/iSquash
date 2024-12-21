@@ -58,6 +58,7 @@ export const tournamentTable = pgTable(
     name: text().notNull(),
     ownerId: uuid()
       .notNull()
+      .default(authUid)
       .references(() => userProfileTable.id, { onDelete: 'no action' }),
   },
   t => [
