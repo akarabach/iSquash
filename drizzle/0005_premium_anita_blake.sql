@@ -1,0 +1,1 @@
+CREATE POLICY "everyone can read" ON "tournament" AS PERMISSIVE FOR SELECT TO public USING (true);

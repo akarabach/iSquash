@@ -62,10 +62,13 @@ export const tournamentTable = pgTable(
       .references(() => userProfileTable.id, { onDelete: 'no action' }),
   },
   t => [
+    pgPolicy('everyone can read', {
+      for: 'select',
+      using: sql`true`,
+    }),
     pgPolicy('owner can insert', {
-      for: 'update',
+      for: 'insert',
       to: authenticatedRole,
-      using: eq(t.ownerId, authUid),
       withCheck: eq(t.ownerId, authUid),
     }),
     pgPolicy('owner can update', {

@@ -1,0 +1,2 @@
+DROP POLICY "owner can insert" ON "tournament" CASCADE;--> statement-breakpoint
+CREATE POLICY "owner can insert" ON "tournament" AS PERMISSIVE FOR INSERT TO "authenticated" WITH CHECK ("tournament"."owner_id" = (select auth.uid()));

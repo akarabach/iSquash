@@ -1,0 +1,1 @@
+ALTER POLICY "owner can insert" ON "tournament" TO authenticated USING ("tournament"."owner_id" = (select auth.uid())) WITH CHECK ("tournament"."owner_id" = (select auth.uid()));
