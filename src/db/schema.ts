@@ -20,10 +20,11 @@ export const userProfileTable = pgTable(
   'user_profile',
   {
     id: uuid().primaryKey().notNull(),
-    login: varchar('login', { length: 256 }).default(sql`gen_random_uuid()`),
-    createdAt: timestamp('created_at', {
+    login: varchar({ length: 256 }).default(sql`gen_random_uuid()`),
+    createdAt: timestamp({
       mode: 'string',
       precision: 3,
+      withTimezone: true,
     }).defaultNow(),
   },
   t => [

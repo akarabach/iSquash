@@ -8,6 +8,20 @@
       "when": 1734826153120,
       "tag": "0000_odd_captain_cross",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1734826606999,
+      "tag": "0001_lyrical_toxin",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1734826910362,
+      "tag": "0002_careless_thunderbolt",
+      "breakpoints": true
     }
   ]
 }
