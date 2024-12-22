@@ -1,5 +1,5 @@
 {
-  "id": "0f32cfc7-3afb-4c35-8f9f-d768a0d7d16b",
+  "id": "dd743225-f550-406f-8947-051a3d9a3beb",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -57,6 +57,16 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "policies": {
+        "owner can insert": {
+          "name": "owner can insert",
+          "as": "PERMISSIVE",
+          "for": "UPDATE",
+          "to": [
+            "authenticated"
+          ],
+          "using": "\"tournament\".\"owner_id\" = (select auth.uid())",
+          "withCheck": "\"tournament\".\"owner_id\" = (select auth.uid())"
+        },
         "owner can update": {
           "name": "owner can update",
           "as": "PERMISSIVE",

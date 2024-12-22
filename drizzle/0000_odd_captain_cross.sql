@@ -14,7 +14,24 @@ CREATE TABLE "user_profile" (
 ALTER TABLE "user_profile" ENABLE ROW LEVEL SECURITY;--> statement-breakpoint
 ALTER TABLE "tournament" ADD CONSTRAINT "tournament_owner_id_user_profile_id_fk" FOREIGN KEY ("owner_id") REFERENCES "public"."user_profile"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "user_profile" ADD CONSTRAINT "user_profile_id_fk" FOREIGN KEY ("id") REFERENCES "auth"."users"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+CREATE POLICY "owner can insert" ON "tournament" AS PERMISSIVE FOR UPDATE TO "authenticated" USING ("tournament"."owner_id" = (select auth.uid())) WITH CHECK ("tournament"."owner_id" = (select auth.uid()));--> statement-breakpoint
 CREATE POLICY "owner can update" ON "tournament" AS PERMISSIVE FOR UPDATE TO "authenticated" USING ("tournament"."owner_id" = (select auth.uid())) WITH CHECK ("tournament"."owner_id" = (select auth.uid()));--> statement-breakpoint
 CREATE POLICY "authenticated can view all profiles" ON "user_profile" AS PERMISSIVE FOR SELECT TO "authenticated" USING (true);--> statement-breakpoint
 CREATE POLICY "supabase_auth_admin can insert profile" ON "user_profile" AS PERMISSIVE FOR INSERT TO "supabase_auth_admin" WITH CHECK (true);--> statement-breakpoint
 CREATE POLICY "owner can update profile" ON "user_profile" AS PERMISSIVE FOR UPDATE TO "authenticated" USING ("user_profile"."id" = (select auth.uid())) WITH CHECK ("user_profile"."id" = (select auth.uid()));
+
+CREATE OR REPLACE FUNCTION handle_public_user()
+RETURNS TRIGGER
+LANGUAGE plpgsql
+SECURITY DEFINER AS $$
+    BEGIN
+        INSERT INTO public.user_profile(id)
+        VALUES (NEW.id);
+        RETURN NEW;
+    END;
+$$;
+
+CREATE OR REPLACE TRIGGER on_auth_user_created
+AFTER INSERT ON auth.users
+FOR EACH ROW
+EXECUTE FUNCTION handle_public_user();
