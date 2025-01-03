@@ -11,21 +11,21 @@ export const env = createEnv({
       .enum(['development', 'test', 'production'])
       .default('development'),
 
-    DATABASE_URL: z.string().min(1),
+    DATABASE_URL: z.string().min(1).default(""),
 
-    GOOGLE_CLIENT_ID: z.string().min(1),
-    GOOGLE_CLIENT_SECRET: z.string().min(1),
+    // GOOGLE_CLIENT_ID: z.string().min(1),
+    // GOOGLE_CLIENT_SECRET: z.string().min(1),
 
-    PLAUSIBLE_URL: z.string().min(1),
-    APP_URL: z.string().min(1),
+    // PLAUSIBLE_URL: z.string().min(1),
+    // APP_URL: z.string().min(1),
 
-    R2_TOKEN_VALUE: z.string().min(1),
-    R2_ACCESS_KEY_ID: z.string().min(1),
-    R2_SECRET_ACCESS_KEY: z.string().min(1),
-    R2_S3_URL: z.string().min(1),
-    R2_BUCKET_NAME: z.string().min(1),
+    // R2_TOKEN_VALUE: z.string().min(1),
+    // R2_ACCESS_KEY_ID: z.string().min(1),
+    // R2_SECRET_ACCESS_KEY: z.string().min(1),
+    // R2_S3_URL: z.string().min(1),
+    // R2_BUCKET_NAME: z.string().min(1),
 
-    IMAGE_BASE_URL: z.string().min(1),
+    // IMAGE_BASE_URL: z.string().min(1),
   },
   /*
    * Environment variables available on the client (and server).
@@ -33,7 +33,7 @@ export const env = createEnv({
    * 💡 You'll get type errors if these are not prefixed with NEXT_PUBLIC_.
    */
   client: {
-    NEXT_PUBLIC_IMAGE_BASE_URL: z.string().min(1),
+    // NEXT_PUBLIC_IMAGE_BASE_URL: z.string().min(1),
     NEXT_PUBLIC_SUPABASE_URL: z.string().min(1),
     NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string().min(1),
   },
@@ -48,19 +48,19 @@ export const env = createEnv({
 
     DATABASE_URL: process.env.DATABASE_URL,
 
-    GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
-    GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
+    // GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
+    // GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
 
-    PLAUSIBLE_URL: process.env.PLAUSIBLE_URL,
-    APP_URL: process.env.APP_URL,
+    // PLAUSIBLE_URL: process.env.PLAUSIBLE_URL,
+    // APP_URL: process.env.APP_URL,
 
-    R2_TOKEN_VALUE: process.env.R2_TOKEN_VALUE,
-    R2_ACCESS_KEY_ID: process.env.R2_ACCESS_KEY_ID,
-    R2_SECRET_ACCESS_KEY: process.env.R2_SECRET_ACCESS_KEY,
-    R2_S3_URL: process.env.R2_S3_URL,
-    R2_BUCKET_NAME: process.env.R2_BUCKET_NAME,
-    IMAGE_BASE_URL: process.env.NEXT_PUBLIC_IMAGE_BASE_URL,
-    NEXT_PUBLIC_IMAGE_BASE_URL: process.env.NEXT_PUBLIC_IMAGE_BASE_URL,
+    // R2_TOKEN_VALUE: process.env.R2_TOKEN_VALUE,
+    // R2_ACCESS_KEY_ID: process.env.R2_ACCESS_KEY_ID,
+    // R2_SECRET_ACCESS_KEY: process.env.R2_SECRET_ACCESS_KEY,
+    // R2_S3_URL: process.env.R2_S3_URL,
+    // R2_BUCKET_NAME: process.env.R2_BUCKET_NAME,
+    // IMAGE_BASE_URL: process.env.NEXT_PUBLIC_IMAGE_BASE_URL,
+    // NEXT_PUBLIC_IMAGE_BASE_URL: process.env.NEXT_PUBLIC_IMAGE_BASE_URL,
     NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
     NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
   },
