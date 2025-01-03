@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "pnpm run db-migrate && next build",
+    "build-migrate": "pnpm run db-migrate && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "db-push": "drizzle-kit push --config=drizzle.config.ts",
