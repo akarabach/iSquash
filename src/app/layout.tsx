@@ -31,7 +31,8 @@ export default function RootLayout({
               <div className="flex shrink items-center justify-around gap-5 rounded-full bg-gray-100 px-3 py-2">
                 <Link
                   href="/"
-                  className="rounded-full bg-gray-900 p-2 text-white"
+                  className="rounded-full  p-2 "
+                  // text-white bg-gray-900
                 >
                   Tournaments
                 </Link>
