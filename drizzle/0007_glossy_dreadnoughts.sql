@@ -1,1 +1,1 @@
-ALTER POLICY "only public, owner" ON "tournament" TO authenticated USING (("tournament"."public" = $1 or "tournament"."owner_id" = (select auth.uid())));
+ALTER POLICY "only public, owner" ON "tournament" TO authenticated USING (("tournament"."public" = true or "tournament"."owner_id" = (select auth.uid())));

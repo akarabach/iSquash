@@ -33,7 +33,7 @@ export default function RootLayout({
                   href="/"
                   className="rounded-full bg-gray-900 p-2 text-white"
                 >
-                  Tournament
+                  Tournaments
                 </Link>
                 <Link href="/">Dashboard</Link>
                 <Link href="/">Schedule</Link>

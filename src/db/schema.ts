@@ -6,6 +6,7 @@ import {
   pgTable,
   text,
   timestamp,
+  unique,
   uuid,
   varchar,
 } from 'drizzle-orm/pg-core';
@@ -53,8 +54,8 @@ export const userProfileTable = pgTable(
   ]
 );
 
-export const tournamentTable = pgTable(
-  'tournament',
+export const eventTable = pgTable(
+  'event',
   {
     id: bigint({ mode: 'number' }).primaryKey().generatedByDefaultAsIdentity(),
     name: text().notNull(),
@@ -64,7 +65,7 @@ export const tournamentTable = pgTable(
       .references(() => userProfileTable.id, { onDelete: 'no action' }),
   },
   t => [
-    pgPolicy('only public, owner', {
+    pgPolicy('only public or owner can read', {
       for: 'select',
       using: or(eq(t.public, true), eq(t.ownerId, authUid)),
     }),
@@ -78,6 +79,32 @@ export const tournamentTable = pgTable(
       to: authenticatedRole,
       using: eq(t.ownerId, authUid),
       withCheck: eq(t.ownerId, authUid),
+    }),
+  ]
+);
+
+export const eventParticipant = pgTable(
+  'event_participant',
+  {
+    id: bigint({ mode: 'number' }).primaryKey().generatedByDefaultAsIdentity(),
+    eventId: bigint({ mode: 'number' }).references(() => eventTable.id),
+    participantId: uuid().references(
+      () => userProfileTable.id
+    ),
+    joinedAt: timestamp({
+      mode: 'string',
+      precision: 3,
+      withTimezone: true,
+    }).defaultNow(),
+  },
+  t => [
+    unique('one_user_per_event')
+      .on(t.eventId, t.participantId)
+      .nullsNotDistinct(),
+    pgPolicy('authenticated can insert', {
+      for: 'insert',
+      to: authenticatedRole,
+      withCheck: eq(t.participantId, authUid),
     }),
   ]
 );
