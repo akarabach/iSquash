@@ -1,5 +1,6 @@
 import {
   bigint,
+  boolean,
   foreignKey,
   pgPolicy,
   pgTable,
@@ -8,7 +9,7 @@ import {
   uuid,
   varchar,
 } from 'drizzle-orm/pg-core';
-import { eq, sql } from 'drizzle-orm';
+import { eq, or, sql } from 'drizzle-orm';
 import {
   authenticatedRole,
   authUid,
@@ -57,14 +58,15 @@ export const tournamentTable = pgTable(
   {
     id: bigint({ mode: 'number' }).primaryKey().generatedByDefaultAsIdentity(),
     name: text().notNull(),
+    public: boolean().notNull().default(false),
     ownerId: uuid()
       .notNull()
       .references(() => userProfileTable.id, { onDelete: 'no action' }),
   },
   t => [
-    pgPolicy('everyone can read', {
+    pgPolicy('only public, owner', {
       for: 'select',
-      using: sql`true`,
+      using: or(eq(t.public, true), eq(t.ownerId, authUid)),
     }),
     pgPolicy('owner can insert', {
       for: 'insert',
